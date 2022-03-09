@@ -23,6 +23,8 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Connection;
+import java.sql.Statement;
 import java.util.ArrayList;
 //import java.util.Collections;
 import java.util.ResourceBundle;
@@ -95,6 +97,32 @@ public class GameController implements Initializable {
         //AnchorPane ae = FXMLLoader(HelloApplication.class.getResource("MainGame.fxml"));
     }
 
+    //sets score after you get game over
+    public void setScore() {
+        DatabaseConnection connectNow = new DatabaseConnection();
+        Connection connectionDB = connectNow.getConnection();
+
+        String user = "blank rn";
+        String wpm = wordPerMin.getText();
+        String acc = accuracy.getText();
+        String time = seconds.getText();
+
+            String insertFields = "INSERT INTO leaderboard (name, speed, accuracy, time) VALUES ('";
+            String insertValues = user + "','" + wpm + "','" + acc + "','" + time +"')";
+            String insertToLeaderboard = insertFields + insertValues;
+
+            try {
+                Statement statement = connectionDB.createStatement();
+                statement.executeUpdate(insertToLeaderboard);
+
+            } catch (Exception e) {
+                e.getCause();
+                e.printStackTrace();
+            }
+        }
+
+
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         StartBtn.setVisible(false);
@@ -125,6 +153,8 @@ public class GameController implements Initializable {
                 if (timer == -1) {
                     myTextField.setDisable(true);
                     myTextField.setText("Game over");
+                    setScore();
+
 
 
                     if (timer == -4) {
@@ -205,6 +235,7 @@ public class GameController implements Initializable {
                 }
                 wordcounter++;
             }
+
 
         }
     }

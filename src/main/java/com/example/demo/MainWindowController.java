@@ -9,6 +9,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -29,6 +30,15 @@ public class MainWindowController implements Initializable {
     private ListView<String> listView;
     @FXML
     private Button buttonStart;
+    @FXML
+    Label welcomeLabel;
+
+    //adds welcome message and sends username to main window
+    public void displayWelcomeMessage(String username){
+        welcomeLabel.setText("Hello: " + username);
+    }
+
+
 
     ObservableList<String> list = FXCollections.observableArrayList("Easy", "Medium", "Hard");
 

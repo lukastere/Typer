@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane fx:id="rootPane" prefHeight="462.0" prefWidth="623.0" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo.GameController">
+    <padding>
+        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+    </padding>
+    <Label layoutX="286.0" layoutY="30.0" text="Typeracer" />
+    <Label fx:id="myDiff" alignment="CENTER" layoutX="247.0" layoutY="60.0" prefHeight="18.0" prefWidth="129.0" text="difficulty level" />
+   <Text fx:id="secProgWord" fill="#b9b8b8" layoutX="271.0" layoutY="207.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" textAlignment="CENTER" wrappingWidth="80.13671875">
+      <font>
+         <Font size="14.0" />
+      </font></Text>
+   <Text fx:id="ProgWord" fontSmoothingType="LCD" layoutX="272.0" layoutY="232.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" textAlignment="CENTER" underline="true" wrappingWidth="78.13671875">
+      <font>
+         <Font size="18.0" />
+      </font></Text>
+    <TextField fx:id="myTextField" alignment="CENTER" layoutX="246.0" layoutY="266.0" onKeyPressed="#StartGame" prefHeight="32.0" prefWidth="130.0" />
+   <ImageView fx:id="incorrect" fitHeight="42.0" fitWidth="46.0" layoutX="153.0" layoutY="261.0" opacity="0.0" pickOnBounds="true" preserveRatio="true">
+      <image>
+         <Image url="@../../../../java/images/incorrect.png" />
+      </image></ImageView>
+   <ImageView fx:id="correct" fitHeight="42.0" fitWidth="46.0" layoutX="153.0" layoutY="323.0" opacity="0.0" pickOnBounds="true" preserveRatio="true">
+      <image>
+         <Image url="@../../../../java/images/correct.png" />
+      </image></ImageView>
+   <Text fx:id="seconds" layoutX="485.0" layoutY="235.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="27.0" />
+   <Label fx:id="wordPerMin" alignment="CENTER" contentDisplay="CENTER" layoutX="469.0" layoutY="303.0" prefHeight="18.0" prefWidth="38.0" textAlignment="CENTER" />
+   <Label fx:id="accuracy" alignment="CENTER" contentDisplay="CENTER" layoutX="469.0" layoutY="265.0" prefHeight="18.0" prefWidth="38.0" textAlignment="CENTER" />
+   <Button fx:id="StartBtn" defaultButton="true" layoutX="277.0" layoutY="331.0" mnemonicParsing="false" onAction="#start" text="PLAY AGAIN" textAlignment="CENTER" />
+    <Label fx:id="welcomeText" layoutX="160.0" layoutY="381.0" prefHeight="18.0" prefWidth="78.0" />
+   <Text layoutX="464.0" layoutY="302.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Accuracy" textAlignment="CENTER" />
+   <Text layoutX="474.0" layoutY="335.0" strokeType="OUTSIDE" strokeWidth="0.0" text="WPM" textAlignment="CENTER" />
+   <Text layoutX="473.0" layoutY="257.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Time " textAlignment="CENTER" />
+   <Text fx:id="fholeText" layoutX="72.0" layoutY="116.0" strokeType="OUTSIDE" strokeWidth="0.0" text="A yacht owned by Igor Sechin, boss of Russian state energy company Rosneft, was grabbed by French customs officers near Marseille.German authorities seized a $600m vessel owned by Russian metal tycoon Alisher Usmanov according to reports." wrappingWidth="479.13673400878906">
+      <font>
+         <Font size="16.0" />
+      </font>
+   </Text>
+   <Text fx:id="thrProgWord1" fill="#b9b8b8" layoutX="270.0" layoutY="258.0" opacity="0.75" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" textAlignment="CENTER" wrappingWidth="80.13671875">
+      <font>
+         <Font size="14.0" />
+      </font>
+   </Text>
+</AnchorPane>
