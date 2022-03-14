@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -15,6 +16,7 @@
             <TableColumn fx:id="time" prefWidth="132.0" text="Time" />
         </columns>
       </TableView>
-      <ComboBox fx:id="comboBoxLeaderboard" layoutX="177.0" layoutY="21.0" prefHeight="25.0" prefWidth="237.0" promptText="Choose scoreboard" />
+      <ComboBox fx:id="comboBoxLeaderboard" layoutX="177.0" layoutY="21.0" onAction="#checkChoice" prefHeight="25.0" prefWidth="237.0" promptText="Choose scoreboard" />
+      <Label fx:id="userLabel" layoutX="40.0" layoutY="13.0" text="Label" visible="false" />
    </children>
 </AnchorPane>

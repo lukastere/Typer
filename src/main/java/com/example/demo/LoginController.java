@@ -24,8 +24,8 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ResourceBundle;
 
-public class LoginController implements Initializable {
 
+public class LoginController implements Initializable {
 
     private Stage stage;
     private Scene scene;
@@ -65,6 +65,8 @@ public class LoginController implements Initializable {
         Image typerPicture = new Image(typerFile.toURI().toString());
         logoImage.setImage(typerPicture);
     }
+
+
 
     // moves onto register window
     public void registerWindow(ActionEvent event) {
@@ -130,13 +132,12 @@ public class LoginController implements Initializable {
 
             FXMLLoader loader = new FXMLLoader(getClass().getResource("MainWindow.fxml"));
             root = loader.load();
-
-            String usrname = username.getText();
             MainWindowController mainWindowController = loader.getController();
             //trying to send username to main menu
-            mainWindowController.displayWelcomeMessage(usrname);
+            mainWindowController.getUser(username.getText());
             switchToMain(event);
-
+            username.clear();
+            password.clear();
         } catch (Exception e) {
             e.printStackTrace();
             e.getCause();
@@ -151,8 +152,11 @@ public class LoginController implements Initializable {
         stage.show();
     }
 
+
+
     @FXML
     protected void onHelloButtonClick() {
         welcomeText.setText("Welcome to JavaFX Application!");
     }
 }
+

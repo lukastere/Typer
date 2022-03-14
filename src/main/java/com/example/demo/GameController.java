@@ -38,6 +38,20 @@ public class GameController implements Initializable {
     private int wordcounter = 0;
     private int first = 1;
 
+
+    static String x;
+
+
+    public void getUser(String text) {
+        x = text;
+        System.out.println("You entered main window user : "+ x);
+    }
+
+    public String getx(){
+        return x;
+    }
+
+
     ScheduledExecutorService executor = Executors.newScheduledThreadPool(1);
 
 //    @FXML
@@ -101,8 +115,7 @@ public class GameController implements Initializable {
     public void setScore() {
         DatabaseConnection connectNow = new DatabaseConnection();
         Connection connectionDB = connectNow.getConnection();
-
-        String user = "blank rn";
+        String user = x;
         String wpm = wordPerMin.getText();
         String acc = accuracy.getText();
         String time = seconds.getText();
@@ -142,7 +155,7 @@ public class GameController implements Initializable {
         wordcounter++;
     }
 
-    int timer = 60;
+    int timer = 5;
     Runnable r = new Runnable() {
         @Override
         public void run() {
@@ -238,7 +251,8 @@ public class GameController implements Initializable {
 
 
         }
-    }
+
+}
 
 
 
