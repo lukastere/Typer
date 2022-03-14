@@ -13,7 +13,7 @@
           <TableColumn fx:id="name" prefWidth="99.0" text="Username" />
           <TableColumn fx:id="speed" prefWidth="86.0" text="Speed(WPM)" />
             <TableColumn fx:id="accuracy" prefWidth="124.0" text="Accuracy %" />
-            <TableColumn fx:id="time" prefWidth="132.0" text="Time" />
+            <TableColumn fx:id="difficulty" prefWidth="132.0" text="Difficulty" />
         </columns>
       </TableView>
       <ComboBox fx:id="comboBoxLeaderboard" layoutX="177.0" layoutY="21.0" onAction="#checkChoice" prefHeight="25.0" prefWidth="237.0" promptText="Choose scoreboard" />

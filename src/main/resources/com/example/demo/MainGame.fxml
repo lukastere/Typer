@@ -1,23 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="rootPane" prefHeight="462.0" prefWidth="623.0" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo.GameController">
+<AnchorPane fx:id="rootPane" prefHeight="462.0" prefWidth="623.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo.GameController">
     <padding>
         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
     </padding>
     <Label layoutX="286.0" layoutY="30.0" text="Typeracer" />
     <Label fx:id="myDiff" alignment="CENTER" layoutX="247.0" layoutY="60.0" prefHeight="18.0" prefWidth="129.0" text="difficulty level" />
    <Label fx:id="level" layoutX="362.0" layoutY="61.0" prefHeight="17.0" prefWidth="130.0" />
-   <Text fx:id="secProgWord" fill="#b9b8b8" layoutX="271.0" layoutY="207.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" textAlignment="CENTER" wrappingWidth="80.13671875">
+   <Text fx:id="secProgWord" fill="#b9b8b8" layoutX="248.0" layoutY="208.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" textAlignment="CENTER" wrappingWidth="129.0">
       <font>
          <Font size="14.0" />
       </font></Text>
-   <Text fx:id="ProgWord" fontSmoothingType="LCD" layoutX="272.0" layoutY="232.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" textAlignment="CENTER" underline="true" wrappingWidth="78.13671875">
+   <Text fx:id="ProgWord" fontSmoothingType="LCD" layoutX="248.0" layoutY="237.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" textAlignment="CENTER" underline="true" wrappingWidth="130.0">
       <font>
          <Font size="18.0" />
       </font></Text>
@@ -42,13 +46,12 @@
          <Font size="16.0" />
       </font>
    </Text>
-   <Text fx:id="thrProgWord1" fill="#b9b8b8" layoutX="270.0" layoutY="258.0" opacity="0.75" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" textAlignment="CENTER" wrappingWidth="80.13671875">
+   <Text fx:id="thrProgWord1" fill="#b9b8b8" layoutX="246.0" layoutY="258.0" opacity="0.75" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" textAlignment="CENTER" wrappingWidth="129.0">
       <font>
          <Font size="14.0" />
       </font>
    </Text>
-   <Button fx:id="goBackToMain" layoutX="269.0" layoutY="338.0" mnemonicParsing="false" onAction="#goBackToMain" text="PLAY AGAIN" />
-   <Button fx:id="CorIncorWindow" layoutX="41.0" layoutY="338.0" mnemonicParsing="false" onAction="#GoToCorIncorWindow" text="Check Incorrect/Correct words" />
-   <Label fx:id="lable" layoutX="298.0" layoutY="399.0" text="Label" />
-   <Label fx:id="username" layoutX="72.0" layoutY="30.0" text="username" />
+   <Button fx:id="goBackToMain" layoutX="269.0" layoutY="318.0" mnemonicParsing="false" onAction="#goBackToMain" text="PLAY AGAIN" />
+   <Button fx:id="CorIncorWindow" layoutX="41.0" layoutY="318.0" mnemonicParsing="false" onAction="#GoToCorIncorWindow" text="Check Incorrect/Correct words" />
+   <Button fx:id="back" layoutX="269.0" layoutY="351.0" mnemonicParsing="false" onAction="#goBackToMain" prefHeight="25.0" prefWidth="82.0" text="Back" />
 </AnchorPane>

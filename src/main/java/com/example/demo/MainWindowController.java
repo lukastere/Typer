@@ -15,7 +15,6 @@ import javafx.stage.Stage;
 
 import java.io.*;
 import java.net.URL;
-import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class MainWindowController implements Initializable {
@@ -24,7 +23,6 @@ public class MainWindowController implements Initializable {
 
     private Stage stage;
     private Scene scene;
-    private Parent root;
 
     @FXML
     public ComboBox<String> myComboBox;
@@ -55,7 +53,7 @@ public class MainWindowController implements Initializable {
 
 
 
-    public void logout(ActionEvent event) throws IOException{
+    public void logout(ActionEvent event){
         try {
             Parent root = FXMLLoader.load(getClass().getResource("login-view.fxml"));
             stage = (Stage)((Node)event.getSource()).getScene().getWindow();
@@ -127,9 +125,68 @@ public class MainWindowController implements Initializable {
     }
 
     public void buttonStart(ActionEvent event) throws IOException{
+        if(myComboBox.getValue().equals("Easy") ){
+            try{
+                File file = new File("wordList");
+                FileWriter fr = new FileWriter(file);
+                BufferedReader reader = new BufferedReader(new FileReader("easy"));
+                String line = null;
+                while ((line = reader.readLine()) != null){
+                    String[] words = line.split(" ");
+                    for (String word : words) {
+                        fr.write(word);
+                        fr.write("\n");
+                    }
+                }
+                fr.close();
+
+            }catch (IOException ex){
+                System.out.println("Couldn't read easy text contents");
+            }
+        }
+        else if(myComboBox.getValue().equals("Medium")){
+            try{
+                File file = new File("wordList");
+                FileWriter fr = new FileWriter(file);
+                BufferedReader reader = new BufferedReader(new FileReader("medium.txt"));
+                String line = null;
+                while ((line = reader.readLine()) != null){
+                    String[] words = line.split(" ");
+                    for (String word : words) {
+                        fr.write(word);
+                        fr.write("\n");
+                    }
+                }
+                fr.close();
+
+            }catch (IOException ex){
+                System.out.println("Couldn't read medium text contents");
+            }
+        }
+        else if(myComboBox.getValue().equals("Hard")){
+            try{
+                File file = new File("wordList");
+                FileWriter fr = new FileWriter(file);
+                BufferedReader reader = new BufferedReader(new FileReader("hard.txt"));
+                String line = null;
+                while ((line = reader.readLine()) != null){
+                    String[] words = line.split(" ");
+                    for (String word : words) {
+                        fr.write(word);
+                        fr.write("\n");
+                    }
+                }
+                fr.close();
+
+            }catch (IOException ex){
+                System.out.println("Couldn't read hard text contents");
+            }
+        }
         FXMLLoader leaderboards = new FXMLLoader(getClass().getResource("MainGame.fxml"));
-        Scene scene = new Scene(leaderboards.load(), 600, 400);
-        Stage stage = new Stage();
+        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        scene = new Scene(leaderboards.load());
+        GameController gameController = leaderboards.getController();
+        gameController.showLevel(myComboBox.getValue());
         GameController GameController = leaderboards.getController();
         GameController.getUser(x);
 

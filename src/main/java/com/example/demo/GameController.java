@@ -9,6 +9,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 //import javafx.geometry.Bounds;
 //import javafx.scene.Scene;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -82,6 +83,8 @@ public class GameController implements Initializable {
     private Button CorIncorWindow;
     @FXML private Label level;
     @FXML private Label username;
+    private Stage stage;
+    private Scene scene;
 
     static String x;
     ArrayList<String> words = new ArrayList<>();
@@ -115,10 +118,10 @@ public class GameController implements Initializable {
         String user = x;
         String wpm = wordPerMin.getText();
         String acc = accuracy.getText();
-        String time = seconds.getText();
+        String difficulty = level.getText();
 
-        String insertFields = "INSERT INTO leaderboard (name, speed, accuracy, time) VALUES ('";
-        String insertValues = user + "','" + wpm + "','" + acc + "','" + time +"')";
+        String insertFields = "INSERT INTO newleaderboard (name, speed, accuracy, difficulty) VALUES ('";
+        String insertValues = user + "','" + wpm + "','" + acc + "','" + difficulty +"')";
         String insertToLeaderboard = insertFields + insertValues;
 
         try {
@@ -326,10 +329,11 @@ public class GameController implements Initializable {
     public void goBackToMain(ActionEvent event){
         try {
             Parent root = FXMLLoader.load(getClass().getResource("MainWindow.fxml"));
-            Stage stage = new Stage();
-            stage.setTitle("Log into Typer!");
-            stage.setScene(new Scene(root));
+            stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+            scene = new Scene(root);
+            stage.setScene(scene);
             stage.show();
+            executor.shutdown();
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -370,7 +374,6 @@ public class GameController implements Initializable {
             e.getCause();
         }
     }
-
 
     public void getUser(String text) {
         x = text;

@@ -31,7 +31,7 @@ public class LeaderboardController implements Initializable {
     @FXML
     private TableColumn<LeaderboardData, Float> accuracy;
     @FXML
-    private TableColumn<LeaderboardData, Float> time;
+    private TableColumn<LeaderboardData, String> difficulty;
     @FXML
     private Label userLabel;
     ObservableList<String> tableList = FXCollections.observableArrayList("My Scores", "All High Scores");
@@ -50,7 +50,7 @@ public class LeaderboardController implements Initializable {
         name.setCellValueFactory(new PropertyValueFactory<LeaderboardData, String>("name"));
         speed.setCellValueFactory(new PropertyValueFactory<LeaderboardData, Integer>("speed"));
         accuracy.setCellValueFactory(new PropertyValueFactory<LeaderboardData, Float>("accuracy"));
-        time.setCellValueFactory(new PropertyValueFactory<LeaderboardData, Float>("time"));
+        difficulty.setCellValueFactory(new PropertyValueFactory<LeaderboardData, String>("difficulty"));
 
 
         leaderboards.setItems(scores);
@@ -66,22 +66,22 @@ public class LeaderboardController implements Initializable {
             if(comboBoxLeaderboard.getValue() == "My Scores"){
                 DatabaseConnection connectNow = new DatabaseConnection();
                 Connection connectionDB = connectNow.getConnection();
-                String getScores = "select * from leaderboard where name = '" + x +"'";
+                String getScores = "select * from newleaderboard where name = '" + x +"'";
                 Statement statement = connectionDB.createStatement();
                 ResultSet queryResult = statement.executeQuery(getScores);
                 setUserScores();
                 while (queryResult.next()) {
-                    scores.add(new LeaderboardData(queryResult.getString("name"), queryResult.getInt("speed"), queryResult.getFloat("accuracy"), queryResult.getFloat("time")));
+                    scores.add(new LeaderboardData(queryResult.getString("name"), queryResult.getInt("speed"), queryResult.getFloat("accuracy"), queryResult.getString("difficulty")));
                 }
-            }else if(comboBoxLeaderboard.getValue() == "Latest High Scores"){
+            }else if(comboBoxLeaderboard.getValue() == "All High Scores"){
                 DatabaseConnection connectNow = new DatabaseConnection();
                 Connection connectionDB = connectNow.getConnection();
-                String getScores = "SELECT * FROM leaderboard";
+                String getScores = "SELECT * FROM newleaderboard";
                 Statement statement = connectionDB.createStatement();
                 ResultSet queryResult = statement.executeQuery(getScores);
                 setUserScores();
                 while (queryResult.next()) {
-                    scores.add(new LeaderboardData(queryResult.getString("name"), queryResult.getInt("speed"), queryResult.getFloat("accuracy"), queryResult.getFloat("time")));
+                    scores.add(new LeaderboardData(queryResult.getString("name"), queryResult.getInt("speed"), queryResult.getFloat("accuracy"), queryResult.getString("difficulty")));
                 }
             }
 
@@ -101,12 +101,12 @@ public class LeaderboardController implements Initializable {
                 Connection connectionDB = connectNow.getConnection();
                 //sql query
 
-                String getScores = "select * from leaderboard where name = '" + x +"'";
+                String getScores = "select * from newleaderboard where name = '" + x +"'";
                 Statement statement = connectionDB.createStatement();
                 ResultSet queryResult = statement.executeQuery(getScores);
 
                 while (queryResult.next()) {
-                    scores.add(new LeaderboardData(queryResult.getString("name"), queryResult.getInt("speed"), queryResult.getFloat("accuracy"), queryResult.getFloat("time")));
+                    scores.add(new LeaderboardData(queryResult.getString("name"), queryResult.getInt("speed"), queryResult.getFloat("accuracy"), queryResult.getString("difficulty")));
                 }
 
             }catch (Exception e){

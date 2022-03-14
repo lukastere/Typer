@@ -6,13 +6,13 @@ public class LeaderboardData {
     private String name;
     private int speed;
     private float accuracy;
-    private float time;
+    private String difficulty;
 
-    public LeaderboardData(String name, int speed, float accuracy, float time) {
+    public LeaderboardData(String name, int speed, float accuracy, String difficulty) {
         this.name = name;
         this.speed = speed;
         this.accuracy = accuracy;
-        this.time = time;
+        this.difficulty = difficulty;
     }
 
     public String getName() {
@@ -27,8 +27,8 @@ public class LeaderboardData {
         return accuracy;
     }
 
-    public float getTime() {
-        return time;
+    public String getDifficulty() {
+        return difficulty;
     }
 
     @Override
@@ -37,7 +37,7 @@ public class LeaderboardData {
                 "name='" + name + '\'' +
                 ", speed=" + speed +
                 ", accuracy=" + accuracy +
-                ", time=" + time +
+                ", difficulty=" + difficulty +
                 '}';
     }
 }
