@@ -1,20 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo.LeaderboardController">
-    <children>
-        <TableView fx:id="leaderboards" layoutX="79.0" layoutY="57.0" prefHeight="287.0" prefWidth="443.0">
-            <columns>
-                <TableColumn fx:id="name" prefWidth="99.0" text="Username" />
-                <TableColumn fx:id="speed" prefWidth="86.0" text="Speed(WPM)" />
-                <TableColumn fx:id="accuracy" prefWidth="124.0" text="Accuracy %" />
-                <TableColumn fx:id="time" prefWidth="132.0" text="Time" />
-            </columns>
-        </TableView>
-        <ComboBox fx:id="comboBoxLeaderboard" layoutX="177.0" layoutY="21.0" prefHeight="25.0" prefWidth="237.0" promptText="Choose scoreboard" />
-    </children>
+   <children>
+      <TableView fx:id="leaderboards" layoutX="79.0" layoutY="57.0" prefHeight="287.0" prefWidth="443.0">
+        <columns>
+          <TableColumn fx:id="name" prefWidth="99.0" text="Username" />
+          <TableColumn fx:id="speed" prefWidth="86.0" text="Speed(WPM)" />
+            <TableColumn fx:id="accuracy" prefWidth="124.0" text="Accuracy %" />
+            <TableColumn fx:id="time" prefWidth="132.0" text="Time" />
+        </columns>
+      </TableView>
+      <ComboBox fx:id="comboBoxLeaderboard" layoutX="177.0" layoutY="21.0" onAction="#checkChoice" prefHeight="25.0" prefWidth="237.0" promptText="Choose scoreboard" />
+      <Label fx:id="userLabel" layoutX="40.0" layoutY="13.0" text="Label" visible="false" />
+   </children>
 </AnchorPane>

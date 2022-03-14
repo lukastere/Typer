@@ -9,6 +9,5 @@
    <children>
       <TextField fx:id="webUrl" layoutX="38.0" layoutY="46.0" promptText="link" />
       <Button fx:id="confirmScrape" layoutX="38.0" layoutY="91.0" mnemonicParsing="false" onAction="#setConfirmScrape" prefHeight="25.0" prefWidth="149.0" text="Confirm" />
-      <ListView fx:id="scrapeText" layoutX="238.0" layoutY="46.0" prefHeight="317.0" prefWidth="302.0" />
    </children>
 </AnchorPane>

@@ -6,6 +6,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -16,6 +17,7 @@ import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
 import java.io.File;
+import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -66,10 +68,10 @@ public class LoginController implements Initializable {
     public void registerWindow(ActionEvent event) {
         try {
             Parent root = FXMLLoader.load(getClass().getResource("register-view.fxml"));
-            Stage registerStage = new Stage();
-            registerStage.setTitle("Registration form!");
-            registerStage.setScene(new Scene(root));
-            registerStage.show();
+            stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+            scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -81,7 +83,8 @@ public class LoginController implements Initializable {
 
         //if fields are not blank then it calls validateLogin method
         if (username.getText().isBlank() == false && password.getText().isBlank() == false) {
-            validateLogin();
+            validateLogin(event);
+
         } else {
             loginError.setText("Please enter username and password");
         }
@@ -93,7 +96,7 @@ public class LoginController implements Initializable {
         stage.close();
     }
 
-    public void validateLogin() {
+    public void validateLogin(ActionEvent event) {
         DatabaseConnection connectNow = new DatabaseConnection();
         Connection connectDB = connectNow.getConnection();
 
@@ -106,10 +109,8 @@ public class LoginController implements Initializable {
             while (queryResult.next()) {
                 if (queryResult.getInt(1) == 1) {
                     loginError.setText("You have logged in!");
-                  //  String user = username.getText();
                     //calls register view
-                   // String user = username.getText();
-                    mainMenuWindow();
+                    mainMenuWindow(event);
                 } else {
                     loginError.setText("Invalid login, please try again!");
 
@@ -124,29 +125,31 @@ public class LoginController implements Initializable {
 
 
 
-    public void mainMenuWindow() {
-
-
+    public void mainMenuWindow(ActionEvent event) {
         try {
-            //String user = username.getText();
-            FXMLLoader loader=new FXMLLoader(getClass().getResource("MainWindow.fxml"));
-            Parent root = (Parent) loader.load();
 
-
-
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("MainWindow.fxml"));
+            root = loader.load();
             MainWindowController mainWindowController = loader.getController();
-            mainWindowController.myTfunct(username.getText());
-
-
-            Stage stage = new Stage();
-            stage.setTitle("Log into Typer!");
-            stage.setScene(new Scene(root));
-            stage.show();
-
+            //trying to send username to main menu
+            mainWindowController.getUser(username.getText());
+            switchToMain(event);
+            //check the username
+            System.out.println(username.getText());
+            username.clear();
+            password.clear();
         } catch (Exception e) {
             e.printStackTrace();
             e.getCause();
         }
+    }
+
+    public void switchToMain(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("MainWindow.fxml"));
+        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
     }
 
     @FXML

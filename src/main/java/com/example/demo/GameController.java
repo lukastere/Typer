@@ -83,7 +83,7 @@ public class GameController implements Initializable {
     @FXML private Label level;
     @FXML private Label username;
 
-
+    static String x;
     ArrayList<String> words = new ArrayList<>();
 
     //9.19
@@ -108,14 +108,11 @@ public class GameController implements Initializable {
     public void start(ActionEvent ae) throws IOException {
         //AnchorPane ae = FXMLLoader(HelloApplication.class.getResource("MainGame.fxml"));
     }
-    public void tmyTfunct(String text){
-username.setText(text);
-    }
     public void setScore() {
         DatabaseConnection connectNow = new DatabaseConnection();
         Connection connectionDB = connectNow.getConnection();
 
-        String user = username.getText();
+        String user = x;
         String wpm = wordPerMin.getText();
         String acc = accuracy.getText();
         String time = seconds.getText();
@@ -166,7 +163,7 @@ username.setText(text);
     public void showLevel(String text){
         level.setText(text);
     }
-    int timer = 10;
+    int timer = 60;
     Runnable r = new Runnable() {
         @Override
         public void run() {
@@ -326,8 +323,6 @@ username.setText(text);
     }
 
 
-
-
     public void goBackToMain(ActionEvent event){
         try {
             Parent root = FXMLLoader.load(getClass().getResource("MainWindow.fxml"));
@@ -377,6 +372,9 @@ username.setText(text);
     }
 
 
+    public void getUser(String text) {
+        x = text;
+    }
 }
 
 

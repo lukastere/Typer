@@ -17,10 +17,11 @@ public class MainWindow extends Application {
         stage.setTitle("FastFingerTips");
         stage.setScene(scene);
         stage.show();
+
     }
 
     public static void main(String[] args) {
         launch(args);
     }
 
-    }
+}

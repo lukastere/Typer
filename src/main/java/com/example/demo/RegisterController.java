@@ -4,6 +4,7 @@ import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -17,12 +18,18 @@ import java.sql.Connection;
 import java.sql.Statement;
 
 public class RegisterController {
+
+    private Stage stage;
+    private Scene scene;
+    private Parent root;
+
     @FXML
     private Button closeButton;
     @FXML
     private Label registrationMessageLabel;
     @FXML
     private Label passwordConfirmationLabel;
+
 
 
     @FXML
@@ -56,10 +63,10 @@ public class RegisterController {
 
     public void goBackButton(ActionEvent event) {
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("login-view.fxml"));
-            Stage stage = new Stage();
-            stage.setTitle("Log into Typer!");
-            stage.setScene(new Scene(root));
+            Parent root = FXMLLoader.load(getClass().getResource("register-view.fxml"));
+            stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+            scene = new Scene(root);
+            stage.setScene(scene);
             stage.show();
 
         } catch (Exception e) {
@@ -67,7 +74,6 @@ public class RegisterController {
             e.getCause();
         }
     }
-
 
     public void registerUser() {
         DatabaseConnection connectNow = new DatabaseConnection();

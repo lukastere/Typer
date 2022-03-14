@@ -6,6 +6,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -20,13 +21,22 @@ import java.util.ResourceBundle;
 public class MainWindowController implements Initializable {
 
 
+
+    private Stage stage;
+    private Scene scene;
+    private Parent root;
+
     @FXML
     public ComboBox<String> myComboBox;
-@FXML
-public Label username;
+    @FXML
+    public Label username;
     @FXML public Button startButton;
 
+    @FXML public Button logout;
     ObservableList<String> list = FXCollections.observableArrayList("Import/Scrape","Easy", "Medium", "Hard");
+
+
+    static String x;
 
 
     @Override
@@ -36,9 +46,26 @@ public Label username;
         startButton.setDisable(true);
     }
 
+
     public void comboBox(ActionEvent event){
         if(myComboBox.getValue().equals("Import/Scrape") || myComboBox.getValue().equals("Easy") || myComboBox.getValue().equals("Medium") || myComboBox.getValue().equals("Hard")){
             startButton.setDisable(false);
+        }
+    }
+
+
+
+    public void logout(ActionEvent event) throws IOException{
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("login-view.fxml"));
+            stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+            scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            e.getCause();
         }
     }
 
@@ -77,89 +104,42 @@ public Label username;
         FXMLLoader leaderboards = new FXMLLoader(getClass().getResource("Leaderboards.fxml"));
         Scene scene = new Scene(leaderboards.load(), 600, 400);
         Stage stage = new Stage();
+        LeaderboardController LeaderboardController = leaderboards.getController();
+        LeaderboardController.getUser(x);
+        System.out.println(x);
+
         stage.setTitle("FastFingerTips");
         stage.setScene(scene);
         stage.show();
     }
-    public void buttonWebscrape() throws IOException{
-        FXMLLoader webscrape = new FXMLLoader(getClass().getResource("Webscrape.fxml"));
-        Scene scene = new Scene(webscrape.load(), 600, 400);
+    public void buttonWebscrape(ActionEvent event) throws IOException{
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("Webscrape.fxml"));
+            stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+            scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            e.getCause();
+        }
+    }
+
+    public void buttonStart(ActionEvent event) throws IOException{
+        FXMLLoader leaderboards = new FXMLLoader(getClass().getResource("MainGame.fxml"));
+        Scene scene = new Scene(leaderboards.load(), 600, 400);
         Stage stage = new Stage();
+        GameController GameController = leaderboards.getController();
+        GameController.getUser(x);
+
         stage.setTitle("FastFingerTips");
         stage.setScene(scene);
         stage.show();
     }
-    public void myTfunct(String text){
-        username.setText(text);
-    }
 
-    public void buttonStart(ActionEvent event) throws IOException, NullPointerException{
-        if(myComboBox.getValue().equals("Easy") ){
-            try{
-                File file = new File("wordList");
-                FileWriter fr = new FileWriter(file);
-                BufferedReader reader = new BufferedReader(new FileReader("easy"));
-                String line = null;
-                while ((line = reader.readLine()) != null){
-                    String[] words = line.split(" ");
-                    for (String word : words) {
-                        fr.write(word);
-                        fr.write("\n");
-                    }
-                }
-                fr.close();
-
-            }catch (IOException ex){
-                System.out.println("Couldn't read easy text contents");
-            }
-        }
-        else if(myComboBox.getValue().equals("Medium")){
-            try{
-                File file = new File("wordList");
-                FileWriter fr = new FileWriter(file);
-                BufferedReader reader = new BufferedReader(new FileReader("medium"));
-                String line = null;
-                while ((line = reader.readLine()) != null){
-                    String[] words = line.split(" ");
-                    for (String word : words) {
-                        fr.write(word);
-                        fr.write("\n");
-                    }
-                }
-                fr.close();
-
-            }catch (IOException ex){
-                System.out.println("Couldn't read medium text contents");
-            }
-        }
-        else if(myComboBox.getValue().equals("Hard")){
-            try{
-                File file = new File("wordList");
-                FileWriter fr = new FileWriter(file);
-                BufferedReader reader = new BufferedReader(new FileReader("hard"));
-                String line = null;
-                while ((line = reader.readLine()) != null){
-                    String[] words = line.split(" ");
-                    for (String word : words) {
-                        fr.write(word);
-                        fr.write("\n");
-                    }
-                }
-                fr.close();
-
-            }catch (IOException ex){
-                System.out.println("Couldn't read hard text contents");
-            }
-        }
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("MainGame.fxml"));
-        Scene scene = new Scene(loader.load(), 600, 400);
-        GameController gameController = loader.getController();
-        gameController.showLevel(myComboBox.getValue());
-        gameController.tmyTfunct(username.getText());
-        Stage stage = new Stage();
-        stage.setTitle("FastFingerTips");
-        stage.setScene(scene);
-        stage.show();
+    public void getUser(String text) {
+        x = text;
     }
 
 }

@@ -9,6 +9,7 @@
       <ComboBox fx:id="myComboBox" layoutX="436.0" layoutY="354.0" onAction="#comboBox" prefWidth="150.0" promptText="Choose Difficulty" />
       <Button fx:id="buttonImport" layoutX="21.0" layoutY="354.0" mnemonicParsing="false" onAction="#buttonImportAction" prefHeight="25.0" prefWidth="91.0" text="Import" />
       <Button fx:id="buttonLeaderboards" layoutX="255.0" layoutY="194.0" mnemonicParsing="false" onAction="#buttonLeaderboard" prefHeight="25.0" prefWidth="91.0" text="Leaderboards" />
+      <Button fx:id="logout" layoutX="255.0" layoutY="234.0" mnemonicParsing="false" onAction="#logout" prefHeight="25.0" prefWidth="91.0" text="Logout" />
       <Button fx:id="buttonWebscrape" layoutX="121.0" layoutY="354.0" mnemonicParsing="false" onAction="#buttonWebscrape" prefHeight="25.0" prefWidth="91.0" text="Webscrape" />
       <Label fx:id="username" layoutX="39.0" layoutY="21.0" text="Label" />
    </children>
