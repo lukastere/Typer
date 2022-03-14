@@ -1,12 +1,16 @@
 // previously from Pauls github called HelloController
 
 package com.example.demo;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 //import javafx.fxml.FXMLLoader;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 //import javafx.geometry.Bounds;
 //import javafx.scene.Scene;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -17,6 +21,7 @@ import javafx.scene.input.KeyEvent;
 //import javafx.scene.layout.FlowPane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -60,6 +65,8 @@ public class GameController implements Initializable {
     @FXML
     private Text seconds;
     @FXML
+    private Label lable;
+    @FXML
     private Label wordPerMin;
     @FXML
     private Label accuracy;
@@ -67,6 +74,10 @@ public class GameController implements Initializable {
 //    private Button myBButton;
     @FXML
     private Button StartBtn;
+    @FXML
+    private Button goBackToMain;
+    @FXML
+    private Button CorIncorWindow;
 
 
     ArrayList<String> words = new ArrayList<>();
@@ -96,8 +107,18 @@ public class GameController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        StartBtn.setVisible(false);
-        StartBtn.setDisable(true);
+
+//       if (dataCorIncor.text.equals("")){
+//lable.setText("hi");
+//       }else {
+//lable.setText(dataCorIncor.text);
+//       }
+
+
+        //StartBtn.setVisible(false);
+       // StartBtn.setDisable(true);
+        goBackToMain.setVisible(false);
+        goBackToMain.setDisable(true);
         addToList();
         //Collections.shuffle(words);
 
@@ -138,15 +159,20 @@ public class GameController implements Initializable {
                 if (timer == -1) {
                     myTextField.setDisable(true);
                     myTextField.setText("Game over");
-                    StartBtn.setVisible(true);
-                    StartBtn.setDisable(false);
+                 //   StartBtn.setVisible(true);
+                   // StartBtn.setDisable(false);
+                    goBackToMain.setVisible(true);
+                    goBackToMain.setDisable(false);
+
                     executor.shutdown();
 
 //                    if (wordcounter -1 == words.size()) {
 
                     if (timer == -4) {
-                        StartBtn.setVisible(true);
-                        StartBtn.setDisable(false);
+                      //  StartBtn.setVisible(true);
+                       // StartBtn.setDisable(false);
+                        goBackToMain.setVisible(true);
+                        goBackToMain.setDisable(false);
                         executor.shutdown();
                     }
 
@@ -161,6 +187,8 @@ public class GameController implements Initializable {
 
     ArrayList<String> Corr = new ArrayList<>();
     ArrayList<String> inCorr = new ArrayList<>();
+//    ArrayList<String> Typed = new ArrayList<>();
+
 
     private int countAll = 0;
     private int counter = 0;
@@ -201,8 +229,10 @@ public class GameController implements Initializable {
             if (last.equals(ProgWord.getText())) {
                 myTextField.setDisable(true);
                 myTextField.setText("Game over");
-                StartBtn.setVisible(true);
-                StartBtn.setDisable(false);
+               // StartBtn.setVisible(true);
+               // StartBtn.setDisable(false);
+                goBackToMain.setVisible(true);
+                goBackToMain.setDisable(false);
 
 
             } else {            // if correct
@@ -217,11 +247,13 @@ public class GameController implements Initializable {
                     Corr.add(s);
 
 
+
                 } else {
                     thrProgWord1.setFill(Color.RED);
 //                    fholeText.setFill(Color.RED);
 //                    myTextField.setStyle("-fx-text-fill: red; -fx-font-size: 16px;");
-                    inCorr.add(s);
+                    inCorr.add(real);
+                    //Typed.add(s);
 
                 }
                 myTextField.setText("");
@@ -252,8 +284,63 @@ public class GameController implements Initializable {
                 }
                 wordcounter++;
             }
+
+        }
+
+    }
+
+
+
+
+    public void goBackToMain(ActionEvent event){
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("MainWindow.fxml"));
+            Stage stage = new Stage();
+            stage.setTitle("Log into Typer!");
+            stage.setScene(new Scene(root));
+            stage.show();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            e.getCause();
         }
     }
+
+
+    public void GoToCorIncorWindow(ActionEvent event){
+
+        String CorrString = String.join(" ", Corr);
+        String InCorrString = String.join(" ", inCorr);
+
+
+        try {
+            FXMLLoader loader=new FXMLLoader(getClass().getResource("CorIncorWindow.fxml"));
+            Parent root = (Parent) loader.load();
+
+            CorIncorWindowController corIncorWindowController = loader.getController();
+            corIncorWindowController.myFunction(CorrString);
+            corIncorWindowController.mySecFunction(InCorrString);
+
+            Stage stage=new Stage();
+            stage.setScene(new Scene(root));
+            stage.show();
+
+
+//            Parent root = FXMLLoader.load(getClass().getResource("CorIncorWindow.fxml"));
+//            Stage stage = new Stage();
+//
+//            stage.setTitle("Log into Typer!");
+//
+//            stage.setScene(new Scene(root));
+//            stage.show();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            e.getCause();
+        }
+    }
+
+
 }
 
 
