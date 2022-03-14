@@ -27,6 +27,8 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Connection;
+import java.sql.Statement;
 import java.util.ArrayList;
 //import java.util.Collections;
 import java.util.ResourceBundle;
@@ -78,6 +80,8 @@ public class GameController implements Initializable {
     private Button goBackToMain;
     @FXML
     private Button CorIncorWindow;
+    @FXML private Label level;
+    @FXML private Label username;
 
 
     ArrayList<String> words = new ArrayList<>();
@@ -104,6 +108,32 @@ public class GameController implements Initializable {
     public void start(ActionEvent ae) throws IOException {
         //AnchorPane ae = FXMLLoader(HelloApplication.class.getResource("MainGame.fxml"));
     }
+    public void tmyTfunct(String text){
+username.setText(text);
+    }
+    public void setScore() {
+        DatabaseConnection connectNow = new DatabaseConnection();
+        Connection connectionDB = connectNow.getConnection();
+
+        String user = username.getText();
+        String wpm = wordPerMin.getText();
+        String acc = accuracy.getText();
+        String time = seconds.getText();
+
+        String insertFields = "INSERT INTO leaderboard (name, speed, accuracy, time) VALUES ('";
+        String insertValues = user + "','" + wpm + "','" + acc + "','" + time +"')";
+        String insertToLeaderboard = insertFields + insertValues;
+
+        try {
+            Statement statement = connectionDB.createStatement();
+            statement.executeUpdate(insertToLeaderboard);
+
+        } catch (Exception e) {
+            e.getCause();
+            e.printStackTrace();
+        }
+    }
+
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -133,13 +163,16 @@ public class GameController implements Initializable {
 
         wordcounter++;
     }
-
-    int timer = 60;
+    public void showLevel(String text){
+        level.setText(text);
+    }
+    int timer = 10;
     Runnable r = new Runnable() {
         @Override
         public void run() {
             if (myTextField.getText().equals("Game over")) {
                 timer = 0;
+                setScore();
 
             }
             if (timer > -1) {
@@ -163,6 +196,7 @@ public class GameController implements Initializable {
                    // StartBtn.setDisable(false);
                     goBackToMain.setVisible(true);
                     goBackToMain.setDisable(false);
+                    setScore();
 
                     executor.shutdown();
 
@@ -233,6 +267,8 @@ public class GameController implements Initializable {
                // StartBtn.setDisable(false);
                 goBackToMain.setVisible(true);
                 goBackToMain.setDisable(false);
+                setScore();
+
 
 
             } else {            // if correct
@@ -252,7 +288,7 @@ public class GameController implements Initializable {
                     thrProgWord1.setFill(Color.RED);
 //                    fholeText.setFill(Color.RED);
 //                    myTextField.setStyle("-fx-text-fill: red; -fx-font-size: 16px;");
-                    inCorr.add(real);
+                    inCorr.add(s);
                     //Typed.add(s);
 
                 }

@@ -106,7 +106,9 @@ public class LoginController implements Initializable {
             while (queryResult.next()) {
                 if (queryResult.getInt(1) == 1) {
                     loginError.setText("You have logged in!");
+                  //  String user = username.getText();
                     //calls register view
+                   // String user = username.getText();
                     mainMenuWindow();
                 } else {
                     loginError.setText("Invalid login, please try again!");
@@ -119,13 +121,27 @@ public class LoginController implements Initializable {
         }
     }
 
+
+
+
     public void mainMenuWindow() {
+
+
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("MainWindow.fxml"));
-            Stage registerStage = new Stage();
-            registerStage.setTitle("FastFingerTips");
-            registerStage.setScene(new Scene(root));
-            registerStage.show();
+            //String user = username.getText();
+            FXMLLoader loader=new FXMLLoader(getClass().getResource("MainWindow.fxml"));
+            Parent root = (Parent) loader.load();
+
+
+
+            MainWindowController mainWindowController = loader.getController();
+            mainWindowController.myTfunct(username.getText());
+
+
+            Stage stage = new Stage();
+            stage.setTitle("Log into Typer!");
+            stage.setScene(new Scene(root));
+            stage.show();
 
         } catch (Exception e) {
             e.printStackTrace();

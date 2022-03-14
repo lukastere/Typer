@@ -8,6 +8,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 import java.net.URL;
@@ -27,10 +28,12 @@ public class CorIncorWindowController implements Initializable {
     }
     public void mySecFunction(String inCorr){
         InCor.setText(inCorr);
+        InCor.setTextFill(Color.RED);
     }
 
     public void myFunction(String Corr){
         Cor.setText(Corr);
+        Cor.setTextFill(Color.GREEN);
     }
 
 

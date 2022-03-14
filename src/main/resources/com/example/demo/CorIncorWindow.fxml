@@ -2,11 +2,14 @@
 
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
 <AnchorPane fx:id="rootPane" prefHeight="462.0" prefWidth="623.0" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo.CorIncorWindowController">
    <children>
       <Button fx:id="BackToGame" layoutX="125.0" layoutY="357.0" mnemonicParsing="false" onAction="#BackToGame" text="Play Again" />
-      <Label fx:id="Cor" layoutX="111.0" layoutY="126.0" text="Label" />
-      <Label fx:id="InCor" layoutX="357.0" layoutY="126.0" text="Label" />
+      <Label fx:id="Cor" layoutX="111.0" layoutY="126.0" prefHeight="187.0" prefWidth="184.0" text="Label" />
+      <Label fx:id="InCor" layoutX="357.0" layoutY="126.0" prefHeight="187.0" prefWidth="184.0" text="Label" />
+      <Text layoutX="141.0" layoutY="87.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Correct" />
+      <Text layoutX="426.0" layoutY="87.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Incorrect" />
    </children>
 </AnchorPane>
